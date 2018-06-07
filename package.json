@@ -1,0 +1,23 @@
+{
+    "name": "rebuild-blog",
+    "version": "1.0.0",
+    "description": "Rebuild my Blog via node.js",
+    "main": "app.js",
+    "scripts": {
+        "start": "node --use_strict app.js"
+    },
+    "keywords": [
+        "koa",
+        "async"
+    ],
+    "author": "LumiaO",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/LUMIA-N9/Rebuild-Blog"
+    },
+    "dependencies": {
+        "koa": "2.0.0",
+        "koa-bodyparser": "3.2.0",
+        "koa-router": "7.0.0"
+    }
+}
