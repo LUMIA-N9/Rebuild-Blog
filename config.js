@@ -2,7 +2,7 @@ var config = {
     db: {
         dialect: 'mysql',
         database: 'test',
-        username: 'lumia',
+        username: 'root',
         password: '1044740758',
         host: 'localhost',
         port: 3306

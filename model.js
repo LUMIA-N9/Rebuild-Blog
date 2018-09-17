@@ -10,4 +10,4 @@ fs.readdirSync(__dirname + '/models').filter((f) => {
     module.exports[name] = require(__dirname + '/models/' + f);
 });
 
-//db.sync();
+db.sync();
