@@ -1,44 +1,25 @@
 const model = require('../model');
-
+const blogs = require('../blogs');
+const cookies = require('../cookie');
+const COOKIE_NAME = 'LumiaO';
 var fn_blogs = async (ctx, next) => {
-    var summary = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-    var blogs = [{
-            id: '1',
-            name: 'Test Blog',
-            summary: summary,
-            created_at: Date.now() - 120
-        },
-        {
-            id: '2',
-            name: 'Something New',
-            summary: summary,
-            created_at: Date.now() - 120
-        },
-        {
-            id: '3',
-            name: 'Learn JavaScript',
-            summary: summary,
-            created_at: Date.now() - 120
-        },
-        {
-            id: '3',
-            name: 'Learn JavaScript',
-            summary: summary,
-            created_at: Date.now() - 120
-        },
-        {
-            id: '3',
-            name: 'Learn JavaScript',
-            summary: summary,
-            created_at: Date.now() - 120
-        }
-    ];
-        ctx.render('blogs.html', {
-            "blogs": blogs
-        });
-    
+    var cookies_str = ctx.cookies.get(COOKIE_NAME);
+    let user;
+    ctx.state = {
+        'title': ctx.state.title || '日志'
+    };
+    if (cookies_str) {
+        user = await cookies.cookie2user(cookies_str);
+    } else {
+        user = null;
+    }
+    ctx.render('blogs.html', {
+        "blogs": blogs,
+        "users": user
+    });
+
 };
 
 module.exports = {
-    'GET /hello/blog': fn_blogs
+    'GET /blogs': fn_blogs
 };

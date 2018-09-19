@@ -5,9 +5,8 @@ const config = require('./config');
 console.log('init sequelize');
 
 function generateId() {
-    return uuid();
+    return uuid().split('-').join('');
 }
-
 var sequelize = new Sequelize(config.db.database, config.db.username, config.db.password, {
     host: config.db.host,
     dialect: config.db.dialect,
@@ -22,6 +21,10 @@ const ID_TYPE = Sequelize.STRING(50);
 
 function defineModel(name, attributes) {
     var attrs = {};
+    attrs.id = {
+        type: ID_TYPE,
+        primaryKey: true
+    };
     for (let key in attributes) {
         let value = attributes[key];
         if (typeof value === 'object' && value['type']) {
@@ -34,10 +37,6 @@ function defineModel(name, attributes) {
             };
         }
     }
-    attrs.id = {
-        type: ID_TYPE,
-        primaryKey: true
-    };
     attrs.created_at = {
         type: Sequelize.DOUBLE,
         allowNull: false

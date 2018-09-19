@@ -1,10 +1,13 @@
 const db = require('../db');
 
 module.exports = db.defineModel('users', {
-    id: db.ID,
     email: db.STRING(50),
     passwd: db.STRING(50),
-    admin: db.BOOLEAN,
+    admin: {
+        type: db.BOOLEAN,
+        allowNull: false,
+        defaultValue: 0
+    },
     name: db.STRING(50),
-    image: db.STRING(500)
+    //image: db.STRING(500)
 });

@@ -25,20 +25,24 @@ function addMapping(router, mapping) {
 }
 
 function addControllers(router, dir) {
-    fs.readdirSync(__dirname+'/'+dir).filter((f) => {
+    fs.readdirSync(__dirname + '/' + dir).filter((f) => {
         return f.endsWith('.js');
-    }).forEach((f) =>{
+    }).forEach((f) => {
         console.log(`process controller: ${f}...`);
-        let mapping = require(__dirname+'/'+dir+'/'+f);
+        let mapping = require(__dirname + '/' + dir + '/' + f);
         addMapping(router, mapping);
     });
 }
+
 
 module.exports = function (dir) {
     let
         controllers_dir = dir || 'controllers',
         router = require('koa-router')();
     addControllers(router, controllers_dir);
+    router.get('*', async (ctx, next) => {
+        ctx.response.status = 404;
+        ctx.render('error.html', {});
+    })
     return router.routes();
 };
-

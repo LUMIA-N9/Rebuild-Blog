@@ -1,4 +1,4 @@
-{% extends '__base__.html' %} {% block title %}日志{% endblock %} {% block content %}
+{% extends '__base__.html' %} {% block title %}{{ title }}{% endblock %}{% block content %}
 <div class="row">
     <div class="col-md-8">
         {% for blog in blogs %}
@@ -16,6 +16,7 @@
         </p>
         <hr class="divider"> {% endfor %}
     </div>
+    
     <div class="col-md-3 ">
         <div class="panel panel-success">
             <div class="panel-heading">

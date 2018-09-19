@@ -1,7 +1,6 @@
 const db = require('../db');
 
 module.exports = db.defineModel('blogs', {
-    id: db.ID,
     user_id: db.STRING(50),
     user_name: db.STRING(50),
     user_image: db.STRING(500),

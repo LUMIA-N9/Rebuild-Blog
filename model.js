@@ -1,7 +1,7 @@
 const fs = require('fs');
 const db = require('./db');
 
-module.exports={};
+module.exports = {};
 
 fs.readdirSync(__dirname + '/models').filter((f) => {
     return f.endsWith('.js');
@@ -10,4 +10,5 @@ fs.readdirSync(__dirname + '/models').filter((f) => {
     module.exports[name] = require(__dirname + '/models/' + f);
 });
 
-db.sync();
+//db.sync();
+
