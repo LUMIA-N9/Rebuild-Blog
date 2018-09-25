@@ -1,5 +1,6 @@
 const model = require('../model');
 const blogs = require('../blogs');
+const crypto = require('crypto');
 const cookies = require('../cookie');
 const COOKIE_NAME = 'LumiaO';
 let User = model.User;
@@ -9,7 +10,7 @@ var fn_signin = async (ctx, next) => {
             email: ctx.request.body.email
         }
     });
-    if (users) {
+    if (users[0]) {
         var user = JSON.parse(JSON.stringify(users[0]));
         var email = user.email;
         var password = user.passwd;
@@ -20,7 +21,8 @@ var fn_signin = async (ctx, next) => {
                 COOKIE_NAME,
                 cookies.user2cookie(user, 86400), {
                     maxAge: 86400, // cookie有效时长
-                    httpOnly: true // 是否只用于http请求中获取
+                    httpOnly: true, // 是否只用于http请求中获取
+                    path: '/'
                 }
             )
             ctx.state.title = 'Login';
@@ -31,9 +33,7 @@ var fn_signin = async (ctx, next) => {
         }
     } else {
         console.log('signin failed! This email is not register!');
-        ctx.render('signin-failed.html', {
-            title: 'Sign In Failed'
-        });
+        ctx.response.redirect('/blogs');
     }
 };
 
